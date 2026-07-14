@@ -1,0 +1,70 @@
+@use 'variables' as *;
+
+.sidebar {
+  flex: 0 0 240px;
+  @include glass-card($glass-bg-light, $radius-xl, 16px);
+  padding: 1.8rem 1.2rem;
+  height: fit-content;
+  position: sticky;
+  top: 1.5rem;
+  transition: all 0.2s;
+
+  h3 {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: $color-text-secondary;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding-bottom: 0.6rem;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: $gap-sm;
+
+    li a {
+      display: block;
+      padding: 0.45rem 0.8rem;
+      border-radius: $radius-full;
+      color: $color-text;
+      text-decoration: none;
+      font-weight: 450;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: background 0.15s, color 0.15s;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.5);
+        border-color: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(4px);
+        color: $color-text-dark;
+      }
+
+      &.active {
+        background: rgba(255, 255, 255, 0.55);
+        border-color: rgba(255, 255, 255, 0.6);
+        font-weight: 500;
+        box-shadow: $shadow-sm;
+      }
+    }
+  }
+
+  &-meta {
+    margin-top: 1.8rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    font-size: 0.8rem;
+    color: $color-text-muted;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: $gap-sm;
+      margin-bottom: 0.4rem;
+    }
+  }
+}

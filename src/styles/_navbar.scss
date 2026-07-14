@@ -1,0 +1,69 @@
+@use 'variables' as *;
+
+.navbar {
+  @include glass-card($glass-bg-heavy, $radius-lg);
+  padding: 0.9rem 2.2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  transition: box-shadow 0.2s;
+
+  &-brand {
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: $gap-sm;
+    color: $color-text-dark;
+
+    span {
+      background: rgba(30, 41, 59, 0.75);
+      backdrop-filter: blur(4px);
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.15rem 0.8rem;
+      border-radius: $radius-full;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.nav-links {
+  display: flex;
+  gap: $gap-xl;
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    color: $color-text;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.4rem 0.2rem;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+      border-bottom-color: $color-accent;
+      color: $color-text-dark;
+    }
+  }
+
+  .btn-ghost {
+    background: rgba(59, 130, 246, 0.08);
+    padding: 0.4rem 1.2rem;
+    border-radius: $radius-full;
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+
+    &:hover {
+      background: rgba(59, 130, 246, 0.18);
+      border-bottom-color: transparent;
+    }
+  }
+}

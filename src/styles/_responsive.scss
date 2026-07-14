@@ -1,0 +1,69 @@
+@use 'variables' as *;
+
+@media (width < 1024px) or (height < 640px) {
+  .app-wrapper {
+    padding-inline: 5vw;
+  }
+
+  .main-grid {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex: 1 1 auto;
+    width: 100%;
+    position: relative;
+    top: 0;
+    backdrop-filter: blur(16px);
+  }
+
+  .content {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: $gap-md;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-wrapper {
+    padding-inline: 3vw;
+  }
+
+  .content h1 {
+    font-size: 1.6rem;
+    flex-wrap: wrap;
+  }
+
+  .content .link-grid,
+  .content .tool-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .content .action-btn {
+    margin-right: 0;
+  }
+
+  .content .btn-group {
+    flex-direction: column;
+  }
+
+  .content .btn-block {
+    width: 100%;
+  }
+}

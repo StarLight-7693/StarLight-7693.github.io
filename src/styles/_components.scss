@@ -1,0 +1,99 @@
+@use 'variables' as *;
+
+%info-card {
+  @include glass-card($glass-bg-medium, $radius-md, 12px);
+  text-decoration: none;
+  color: $color-text;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.55);
+  }
+}
+
+.content {
+  .link-grid,
+  .tool-grid {
+    display: grid;
+    gap: $gap-md;
+    margin: 1.8rem 0;
+  }
+
+  .link-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .tool-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .link-card {
+    @extend %info-card;
+    padding: 1.2rem 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: $gap-md;
+
+    .link-icon {
+      width: auto;
+      height: auto;
+      max-width: 2.5rem;
+      max-height: 2.5rem;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .link-info {
+      h4 {
+        font-weight: 600;
+        font-size: 1rem;
+        margin-bottom: 0.2rem;
+        color: $color-text-dark;
+      }
+
+      p {
+        font-size: 0.85rem;
+        color: $color-text-muted;
+        margin: 0;
+        line-height: 1.4;
+      }
+    }
+  }
+
+  .tool-card {
+    @extend %info-card;
+    padding: 1.4rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+
+    .tool-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    h4 {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      color: $color-text-dark;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: $color-text-muted;
+      margin: 0 0 0.6rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .tool-tag {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.1);
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: $color-accent;
+      align-self: flex-start;
+      border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+  }
+}

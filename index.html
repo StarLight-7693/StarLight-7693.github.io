@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="TP-RLX=STAR-LIGHT的小站" />
+    <meta name="keywords" content="ColdFieldObserver,冷域观者,AloneVoyager,冷域航者,冷落的小情绪,实况主灯塔,逃少音乐档案馆,逃跑吧少年背景音乐,CFObserver,TP-RLX-STAR-LIGHT,TP-RLX-LIGHT,StarLight-7693,SL-7693" />
+    <meta name="author" content="TP-RLX-LIGHT" />
+    <meta name="nightmode" content="disable" />
+    <title>TP-RLX-LIGHT的小站</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/segoe-pro" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noto-sans-sc@37.0.0/noto_sans_sc_medium/css.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5.2.3/index.min.css" />
+    <script>
+        (function() {
+            var redirect = sessionStorage.redirect;
+            delete sessionStorage.redirect;
+            if (redirect && redirect !== location.href) {
+                history.replaceState(null, null, redirect);
+            }
+        })();
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <p>本站需要开启JavaScript才能加载，请开启JavaScript。</p>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

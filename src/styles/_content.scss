@@ -1,0 +1,72 @@
+@use 'variables' as *;
+
+.content {
+  flex: 1;
+  @include glass-card($glass-bg-light, $radius-xl, 18px);
+  padding: 2.2rem 2.4rem;
+  transition: background 0.2s;
+
+  h1 {
+    font-size: 2.1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    color: $color-text-dark;
+  }
+
+  p {
+    line-height: 1.7;
+    margin: 1.2rem 0;
+    color: $color-text;
+    font-weight: 430;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: $gap-md;
+    margin: 1.8rem 0;
+
+    .stat {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(6px);
+      border-radius: 20px;
+      padding: 1rem 0.8rem;
+      text-align: center;
+      border: 1px solid $glass-border;
+      box-shadow: $shadow-sm;
+
+      strong {
+        display: block;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #0f2b4b;
+      }
+
+      span {
+        font-size: 0.8rem;
+        color: $color-text-secondary;
+      }
+    }
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: $dark-glass;
+    color: white;
+    padding: 0.6rem 1.8rem;
+    border-radius: 60px;
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+    margin-top: 0.8rem;
+
+    &:hover {
+      background: rgba(30, 41, 59, 0.95);
+    }
+  }
+}
