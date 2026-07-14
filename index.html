@@ -13,11 +13,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noto-sans-sc@37.0.0/noto_sans_sc_medium/css.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5.2.3/index.min.css" />
     <script>
-        (function() {
-            var redirect = sessionStorage.redirect;
-            delete sessionStorage.redirect;
-            if (redirect && redirect !== location.href) {
-                history.replaceState(null, null, redirect);
+        (function () {
+            var redirect = sessionStorage.getItem('redirect');
+            sessionStorage.removeItem('redirect');
+            if (redirect && redirect !== window.location.href) {
+                var target = new URL(redirect, window.location.origin);
+                var current = new URL(window.location.href);
+                if (target.origin === current.origin) {
+                    window.history.replaceState(null, '', target.pathname + target.search + target.hash);
+                }
             }
         })();
     </script>
