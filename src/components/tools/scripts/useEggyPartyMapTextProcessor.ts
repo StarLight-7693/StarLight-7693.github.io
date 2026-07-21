@@ -22,16 +22,16 @@ function extractMapCode(text: string): string {
 
 function getExtraInformation(): string {
   const msgList = [
-    '复制内容打开蛋仔派对，就能体验同款地图啦~',
-    '超好玩的蛋仔地图，复制一下马上就能玩哦~',
-    '快来试试这张可爱地图，复制内容进入游戏就可以啦~',
-    '软软萌萌的蛋仔地图等你来玩，复制内容开启冒险吧~',
-    '喜欢这张地图吗？复制内容打开蛋仔就能游玩咯~',
-    '蛋仔专属趣味地图，一键复制，快乐上线~',
-    '奔赴蛋仔乐园啦，复制内容即可体验同款地图~',
-    '圆滚滚的蛋仔世界，这张地图超有趣，快来玩呀~',
-    '把地图带回家~复制内容，在蛋仔派对里尽情玩耍吧~',
-    '可爱地图已就位，复制内容，和蛋仔一起闯关吧~'
+    '长按复制这段内容，打开蛋仔派对，玩视频内同款地图~',
+    '想体验这张超好玩的地图吗？长按复制这段内容，打开蛋仔派对就可以了~',
+    '你好，我的小蛋仔，想要体验这张地图吗？只需要长按复制这段内容，然后打开蛋仔派对就能玩喽~',
+    '想要挑战自己的极限吗？长按复制这段内容，打开蛋仔派对，开启你的冒险之旅吧~',
+    '想要和你的蛋搭子一起玩这张地图？没问题！长按复制这段内容，打开蛋仔派对，然后约上你的蛋搭子和你一起玩就可以了~',
+    '想要检验自己的技术实力吗？长按复制这段内容，打开蛋仔派对，来挑战这张地图吧~',
+    '这张地图太难了，希望你能来挑战一下！长按复制这段内容，打开蛋仔派对，来试试你的技术吧~',
+    '这张地图太好玩了，你也来试试吧！长按复制这段内容，打开蛋仔派对，来体验一下吧~',
+    '如果你觉得不开心的话，不妨来玩一下这张地图吧！长按复制这段内容，打开蛋仔派对，撞走不开心~',
+    '还在为找不到好玩的地图而发愁吗？那么你一定要来玩玩这张地图！长按复制这段内容，打开蛋仔派对，一起来玩吧~'
   ]
   return msgList[Math.floor(Math.random() * msgList.length)]
 }
@@ -43,7 +43,7 @@ function generateOutput(mapName: string, mapCode: string): string {
 地图名：${mapName}
 地图码：${mapCode}
 ${getExtraInformation()}
-(EggyPartyCopyMapTextProcessor Generate)`
+(EggyPartyCopyMapTextProcessor for TP-RLX-LIGHT's Website Generate)`
 }
 
 export function useEggyPartyMapTextProcessor() {

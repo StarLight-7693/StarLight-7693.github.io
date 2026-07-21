@@ -53,7 +53,7 @@ function EggyPartyMapTextProcessor() {
 相关游戏：蛋仔派对
 地图名：此图菜鸟都能过！
 地图码：6040-1745
-复制内容打开蛋仔派对，就能体验同款地图啦~
+想要检验自己的技术实力吗？长按复制这段内容，打开蛋仔派对，来挑战这张地图吧~
 (EggyPartyCopyMapTextProcessor Generate)`}
         </pre>
       </SidebarBlock>
