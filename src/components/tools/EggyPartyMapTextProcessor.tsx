@@ -5,8 +5,8 @@ import SidebarBlock from '../layout/SidebarBlock'
 function EggyPartyMapTextProcessor() {
   const { input, setInput, result, resultType, process, loadExample, clear } = useEggyPartyMapTextProcessor()
 
-  function handleProcess() {
-    process()
+  function handleProcess(shortVideoMode: boolean = false) {
+    process(shortVideoMode)
   }
 
   return (
@@ -28,8 +28,11 @@ function EggyPartyMapTextProcessor() {
       </div>
 
       <div className="btn-group">
-        <button className="btn btn-block" onClick={handleProcess}>
+        <button className="btn btn-block" onClick={() => handleProcess()}>
           处理文本
+        </button>
+        <button className="btn btn-block" onClick={() => handleProcess(true)}>
+          处理文本为短视频文案
         </button>
         <button className="btn btn-block" onClick={loadExample}>
           加载示例
