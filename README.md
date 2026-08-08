@@ -1,7 +1,7 @@
 # StarLight-7693.github.io
 
 ![Last Commit](https://img.shields.io/github/last-commit/StarLight-7693/StarLight-7693.github.io?label=Last%20Commit)
-[![BiliBili](https://img.shields.io/badge/BiliBili-TP--RLX--LIGHT-FF69B4?logo=bilibili&logoColor=F5F5F5)](https://space.bilibili.com/3707028635650857)
+[![BiliBili](https://img.shields.io/badge/BiliBili-TP--RLX--LIGHT-FF69B4?logo=bilibili&logoColor=F5F5F5)](https://space.bilibili.com/3632301571311734)
 [![GitHub](https://img.shields.io/badge/GitHub-StarLight--7693-blue?logo=github&logoColor=F5F5F5)](https://github.com/StarLight-7693)
 
 ## 简介
