@@ -10,9 +10,9 @@
 
 我想说的话都写在[这个网站](https://starlight-7693.github.io)里了，也没什么好介绍的。
 
-这个网站是基于React 19+TypeScript+SCSS技术栈构建的，网站整体视觉风格为浅色云母风格。
+这个网站是基于 VitePress 构建的，网站整体视觉风格为复古风格。
 
-本网站代码基于[AGPL v3](LICENSE)许可证开源，且禁止商业用途。
+本网站代码基于 MIT 许可证开源。
 
 ## Stone Badge
 

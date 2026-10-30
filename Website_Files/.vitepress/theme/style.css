@@ -1,0 +1,607 @@
+/* =========================================================
+   2003 复古博客 · 全局样式
+   设计令牌 + 三态深色模式 + 三栏布局 + 完整 Markdown 排版
+   无圆角 / 无阴影 / 无悬浮特效
+   ========================================================= */
+
+/* ---------- 设计令牌：浅色为默认 ---------- */
+:root {
+  --c-bg: #f0f0f0;
+  --c-surface: #ffffff;
+  --c-panel: #e8e8e8;
+  --c-side: #f4f4f4;
+  --c-border: #808080;
+  --c-border-soft: #b0b0b0;
+  --c-divider: #c0c0c0;
+  --c-text: #1e1e1e;
+  --c-text-soft: #606060;
+  --c-link: #0000ee;
+  --c-link-visited: #551a8b;
+  --c-counter-bg: #222222;
+  --c-counter-fg: #00ff00;
+  --c-accent: #2a2a2a;
+  color-scheme: light;
+  scrollbar-color: #a0a0a0 #e0e0e0;
+  scrollbar-width: auto;
+}
+
+/* ---------- 强制深色：data-theme='dark' ---------- */
+:root[data-theme='dark'] {
+  --c-bg: #1a1a1a;
+  --c-surface: #222222;
+  --c-panel: #2a2a2a;
+  --c-side: #2a2a2a;
+  --c-border: #4a4a4a;
+  --c-border-soft: #4a4a4a;
+  --c-divider: #4a4a4a;
+  --c-text: #e0e0e0;
+  --c-text-soft: #b0b0b0;
+  --c-link: #99ccff;
+  --c-link-visited: #c49cdb;
+  --c-counter-bg: #000000;
+  --c-counter-fg: #00dd00;
+  --c-accent: #e0e0e0;
+  color-scheme: dark;
+  scrollbar-color: #6b6b6b #2d2d2d;
+}
+
+/* ---------- 跟随系统：data-theme='auto' 且系统为深色 ---------- */
+@media (prefers-color-scheme: dark) {
+  :root[data-theme='auto'] {
+    --c-bg: #1a1a1a;
+    --c-surface: #222222;
+    --c-panel: #2a2a2a;
+    --c-side: #2a2a2a;
+    --c-border: #4a4a4a;
+    --c-border-soft: #4a4a4a;
+    --c-divider: #4a4a4a;
+    --c-text: #e0e0e0;
+    --c-text-soft: #b0b0b0;
+    --c-link: #99ccff;
+    --c-link-visited: #c49cdb;
+    --c-counter-bg: #000000;
+    --c-counter-fg: #00dd00;
+    --c-accent: #e0e0e0;
+    color-scheme: dark;
+    scrollbar-color: #6b6b6b #2d2d2d;
+  }
+}
+
+/* ---------- 全局重置 ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Times New Roman', Times, serif, '宋体', SimSun;
+  line-height: 1.5;
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  padding: 12px;
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+a {
+  color: var(--c-link);
+  text-decoration: underline;
+  background-color: transparent;
+}
+
+a:visited {
+  color: var(--c-link-visited);
+}
+
+a:hover,
+a:focus,
+a:active {
+  text-decoration: underline;
+  color: inherit;
+  background-color: transparent;
+  outline: none;
+  box-shadow: none;
+}
+
+hr {
+  border: 0;
+  border-top: 2px solid var(--c-divider);
+  margin: 16px 0;
+}
+
+/* ---------- 三栏整体布局 ---------- */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--c-surface);
+  border: 2px solid var(--c-border);
+  padding: 8px;
+  gap: 10px;
+  box-shadow: none;
+}
+
+.header {
+  flex: 1 0 100%;
+  background-color: var(--c-panel);
+  border: 2px solid var(--c-border-soft);
+  padding: 10px 16px;
+  margin-bottom: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  font-family: 'Times New Roman', Times, serif, '黑体', SimHei;
+}
+
+.site-subtitle {
+  font-size: 0.9rem;
+  color: var(--c-text-soft);
+  font-style: italic;
+}
+
+.sidebar-left {
+  flex: 0 0 180px;
+  background-color: var(--c-side);
+  border: 2px solid var(--c-border-soft);
+  padding: 12px 8px;
+  align-self: flex-start;
+}
+
+.main-content {
+  flex: 1 1 300px;
+  background-color: var(--c-surface);
+  border: 2px solid var(--c-border-soft);
+  padding: 16px 18px;
+  min-width: 0;
+}
+
+.sidebar-right {
+  flex: 0 0 200px;
+  background-color: var(--c-side);
+  border: 2px solid var(--c-border-soft);
+  padding: 12px 8px;
+  align-self: flex-start;
+}
+
+.footer {
+  flex: 1 0 100%;
+  background-color: var(--c-panel);
+  border: 2px solid var(--c-border-soft);
+  padding: 12px 16px;
+  margin-top: 6px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--c-text-soft);
+}
+
+/* ---------- 移动端响应式：左侧栏在上，右侧栏在下 ---------- */
+@media (max-width: 700px) {
+  .container {
+    flex-direction: column;
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .header {
+    flex: 1 0 auto;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sidebar-left {
+    flex: 1 0 auto;
+    width: 100%;
+    order: 1;
+  }
+
+  .main-content {
+    order: 2;
+    width: 100%;
+  }
+
+  .sidebar-right {
+    flex: 1 0 auto;
+    width: 100%;
+    order: 3;
+  }
+
+  .footer {
+    order: 4;
+  }
+
+  .site-title {
+    font-size: 1.6rem;
+  }
+
+  .sidebar-left,
+  .sidebar-right {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    padding: 6px;
+  }
+}
+
+/* ---------- 侧边栏小部件 ---------- */
+.widget {
+  margin-bottom: 20px;
+}
+
+.widget-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+  border-bottom: 2px solid var(--c-border);
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.widget ul {
+  list-style: none;
+  padding-left: 6px;
+}
+
+.widget li {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  border-left: 4px solid var(--c-border-soft);
+  padding-left: 8px;
+}
+
+/* ---------- 导航 ---------- */
+.nav-list li {
+  border-left-color: var(--c-border);
+}
+
+/* ---------- 复古输入框 / 按钮 / 单选 ---------- */
+input[type='text'],
+input[type='search'],
+button {
+  font-family: 'Courier New', Courier, monospace;
+  border: 2px solid var(--c-border-soft);
+  background-color: var(--c-surface);
+  color: var(--c-text);
+  padding: 4px 6px;
+  font-size: 0.9rem;
+}
+
+button {
+  background-color: var(--c-panel);
+  cursor: default;
+  box-shadow: none;
+}
+
+.search-input {
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.search-btn {
+  width: 100%;
+}
+
+/* 单选按钮分组 */
+.theme-switch {
+  font-size: 0.9rem;
+}
+
+.theme-switch label {
+  display: block;
+  margin-bottom: 4px;
+  cursor: default;
+}
+
+.theme-switch input[type='radio'] {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ---------- 计数器（装饰） ---------- */
+.counter {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: var(--c-counter-bg);
+  color: var(--c-counter-fg);
+  padding: 2px 8px;
+  border: 2px inset var(--c-border-soft);
+  display: inline-block;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.counter-note {
+  font-size: 0.7rem;
+  margin-top: 4px;
+  color: var(--c-text-soft);
+}
+
+/* ---------- 文章卡片（首页列表） ---------- */
+.post {
+  margin-bottom: 28px;
+}
+
+.post-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.post-title a {
+  text-decoration: none;
+}
+
+.post-title a:hover {
+  text-decoration: underline;
+}
+
+.post-meta {
+  font-size: 0.8rem;
+  color: var(--c-text-soft);
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--c-border-soft);
+  padding-bottom: 6px;
+}
+
+.post-meta .sticky-tag {
+  color: var(--c-link);
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+.post-excerpt {
+  margin-bottom: 10px;
+}
+
+.read-more {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+/* ---------- 分页 ---------- */
+.posts-divider {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  text-align: center;
+  border-top: 1px dashed var(--c-divider);
+  padding-top: 10px;
+  color: var(--c-text-soft);
+}
+
+.pager {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+}
+
+.pager a,
+.pager span {
+  border: 2px solid var(--c-border-soft);
+  padding: 2px 8px;
+  background-color: var(--c-panel);
+}
+
+.pager .current {
+  background-color: var(--c-surface);
+  font-weight: bold;
+}
+
+.pager .disabled {
+  color: var(--c-text-soft);
+  opacity: 0.6;
+}
+
+.search-hint {
+  font-size: 0.85rem;
+  color: var(--c-text-soft);
+  margin-bottom: 12px;
+  border-bottom: 1px dashed var(--c-border-soft);
+  padding-bottom: 6px;
+}
+
+.no-result {
+  padding: 20px 0;
+  color: var(--c-text-soft);
+  font-style: italic;
+}
+
+/* ---------- 右侧边栏：关于我 ---------- */
+.about-me {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.about-me div {
+  margin-bottom: 2px;
+}
+
+/* ---------- 完整 Markdown 复古排版（包裹 <Content/>） ---------- */
+.retro-doc {
+  word-wrap: break-word;
+}
+
+/* 文章页顶部：标题 + 元数据 */
+.post-header {
+  margin-bottom: 18px;
+}
+
+.post-header-title {
+  font-size: 1.9rem;
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif, '黑体', SimHei;
+  border-bottom: 2px solid var(--c-border);
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.post-header-meta {
+  font-size: 0.85rem;
+  color: var(--c-text-soft);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.post-header-rule {
+  margin-top: 12px;
+}
+
+/* 代码块：表头（左语言标签 / 右复制按钮）+ 代码区 */
+.retro-doc div[class*='language-'] {
+  position: relative;
+  margin: 14px 0;
+  padding-top: 30px;
+  background-color: var(--c-side);
+  border: 2px solid var(--c-border-soft);
+}
+
+.retro-doc div[class*='language-'] pre {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid var(--c-border-soft);
+  background-color: transparent;
+  padding: 10px;
+}
+
+.retro-doc span.lang {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  color: var(--c-text-soft);
+}
+
+.retro-doc button.copy {
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  height: 22px;
+  padding: 0 10px;
+  font-size: 0.8rem;
+  line-height: 18px;
+}
+
+.retro-doc button.copy::after {
+  content: '复制';
+}
+
+.retro-doc button.copy.copied::after {
+  content: '已复制';
+}
+
+.retro-doc h1,
+.retro-doc h2,
+.retro-doc h3,
+.retro-doc h4 {
+  font-family: 'Times New Roman', Times, serif;
+  border-bottom: 2px solid var(--c-border);
+  padding-bottom: 4px;
+  margin: 18px 0 10px;
+  line-height: 1.3;
+}
+
+.retro-doc h1 {
+  font-size: 1.8rem;
+}
+
+.retro-doc h2 {
+  font-size: 1.5rem;
+}
+
+.retro-doc h3 {
+  font-size: 1.25rem;
+}
+
+.retro-doc p {
+  margin-bottom: 14px;
+  text-align: justify;
+}
+
+.retro-doc a {
+  text-decoration: underline;
+}
+
+.retro-doc code,
+.retro-doc pre {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: var(--c-side);
+  border: 1px solid var(--c-border-soft);
+}
+
+.retro-doc code {
+  padding: 1px 4px;
+}
+
+.retro-doc pre {
+  padding: 10px;
+  overflow: auto;
+  margin-bottom: 14px;
+}
+
+.retro-doc pre code {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.retro-doc blockquote {
+  border-left: 4px solid var(--c-border-soft);
+  padding-left: 10px;
+  color: var(--c-text-soft);
+  margin: 10px 0;
+}
+
+.retro-doc table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12px 0;
+}
+
+.retro-doc th,
+.retro-doc td {
+  border: 1px solid var(--c-border-soft);
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.retro-doc th {
+  background-color: var(--c-panel);
+}
+
+.retro-doc hr {
+  border: 0;
+  border-top: 2px solid var(--c-divider);
+  margin: 16px 0;
+}
+
+.retro-doc ul,
+.retro-doc ol {
+  padding-left: 24px;
+  margin-bottom: 14px;
+}
+
+.retro-doc li {
+  margin-bottom: 4px;
+}
+
+.retro-doc img {
+  max-width: 100%;
+  border: 2px solid var(--c-border-soft);
+}
