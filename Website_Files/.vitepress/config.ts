@@ -39,7 +39,7 @@ export default defineConfig({
       ['meta', { name: 'keywords', content: SITE_KEYWORDS }],
       ['link', { rel: 'canonical', href: canonicalUrl }],
       ['link', { rel: 'alternate', type: 'application/rss+xml', title: SITE_TITLE, href: `${BASE_URL}/rss.xml` }],
-      ['link', { rel: 'icon', type: 'image/png', href: `${BASE_URL}/images/favicon.ico` }],
+      ['link', { rel: 'icon', type: 'image/x-icon', href: `${BASE_URL}/images/favicon.ico` }],
       ['meta', { property: 'og:title', content: pageTitle }],
       ['meta', { property: 'og:description', content: pageDescription }],
       ['meta', { property: 'og:url', content: canonicalUrl }],
