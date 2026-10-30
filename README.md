@@ -14,6 +14,36 @@
 
 本网站代码基于 MIT 许可证开源。
 
+## 项目结构
+
+为避免仓库根目录中的其他文件影响 VitePress 对配置、页面和静态资源的识别，所有 VitePress 项目文件统一放在 `Website_Files/` 目录中。GitHub Actions 部署工作流仍位于仓库根目录，并通过 `working-directory` 在该目录中安装依赖和执行构建。
+
+```text
+StarLight-7693.github.io/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml          # GitHub Pages 构建与部署
+├── Website_Files/              # VitePress 项目根目录
+│   ├── .vitepress/
+│   │   ├── theme/              # 自定义主题、布局和组件
+│   │   ├── config.ts           # VitePress 配置
+│   │   └── env.d.ts
+│   ├── posts/                  # 博客文章
+│   ├── public/                 # 静态资源
+│   ├── .gitignore
+│   ├── .npmrc
+│   ├── index.md                # 网站首页
+│   ├── LICENSE
+│   ├── package.json            # VitePress 脚本和依赖
+│   ├── pnpm-lock.yaml
+│   ├── pnpm-workspace.yaml
+│   └── tsconfig.json
+├── .gitignore
+└── README.md
+```
+
+本地开发或构建时，请在 `Website_Files/` 目录中运行 `pnpm dev` 或 `pnpm build`。部署工作流会从同一目录读取锁文件、运行构建，并发布 `.vitepress/dist`。
+
 ## Stone Badge
 
 下面是这个仓库的[Stone Badge](https://stone.professorlee.work/)。
