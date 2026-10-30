@@ -26,9 +26,9 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: latest
           cache: pnpm
-          cache-dependency-path: 2003Implement/pnpm-lock.yaml
+          cache-dependency-path: Website_Files/pnpm-lock.yaml
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -39,7 +39,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 2003Implement/.vitepress/dist
+          path: Website_Files/.vitepress/dist
 
   deploy:
     needs: build
