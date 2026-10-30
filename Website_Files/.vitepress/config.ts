@@ -1,13 +1,14 @@
-import { defineConfig } from 'vitepress';
+import { link } from 'node:fs';
+import { /* createContentLoader, */ defineConfig, type HeadConfig } from 'vitepress';
 import { RssPlugin } from 'vitepress-plugin-rss';
 
 const BASE_URL = (process.env.BASE_URL || 'https://www.skystarlight.top').replace(/\/+$/, '');
 
 /** 站点标题 */
-const SITE_TITLE = '青春纪念册';
+const SITE_TITLE = '青春纪念册 · TP-RLX-LIGHT 个人网站';
 
 /** 站点描述 */
-const SITE_DESC = '2003 级信息技术课个人博客 · 复古风';
+const SITE_DESC = 'TP-RLX-LIGHT 个人网站，记录青春的点滴，分享生活的美好。';
 
 /** 站点作者 */
 const SITE_AUTHOR = 'StarLight-7693';
@@ -22,10 +23,6 @@ export default defineConfig({
   base: '/',
   appearance: false,
   lastUpdated: true,
-  head: [
-    ['meta', { name: 'keywords', content: SITE_KEYWORDS }],
-    ['link', { rel: 'icon', type: 'image/x-icon', href: 'images/favicon.ico' }],
-  ],
   transformHead({ pageData, head }) {
     const author = String(pageData.frontmatter?.author || SITE_AUTHOR);
     const pageTitle = pageData.title || SITE_TITLE;
@@ -36,17 +33,24 @@ export default defineConfig({
       : pagePath.replace(/(^|\/)index\.html$/, '$1');
     const canonicalUrl = new URL(canonicalPath, `${BASE_URL}/`).href;
 
-    head.push(['meta', { name: 'author', content: author }]);
-    head.push(['link', { rel: 'canonical', href: canonicalUrl }]);
-    head.push(['meta', { property: 'og:site_name', content: SITE_TITLE }]);
-    head.push(['meta', { property: 'og:locale', content: 'zh_CN' }]);
-    head.push(['meta', { property: 'og:type', content: pageData.frontmatter?.date ? 'article' : 'website' }]);
-    head.push(['meta', { property: 'og:title', content: pageTitle }]);
-    head.push(['meta', { property: 'og:description', content: pageDescription }]);
-    head.push(['meta', { property: 'og:url', content: canonicalUrl }]);
-    head.push(['meta', { name: 'twitter:card', content: 'summary' }]);
-    head.push(['meta', { name: 'twitter:title', content: pageTitle }]);
-    head.push(['meta', { name: 'twitter:description', content: pageDescription }]);
+    /** head数据 */
+    const headConfig: HeadConfig[] = [
+      ['meta', { name: 'author', content: author }],
+      ['meta', { name: 'keywords', content: SITE_KEYWORDS }],
+      ['link', { rel: 'canonical', href: canonicalUrl }],
+      ['link', { rel: 'alternate', type: 'application/rss+xml', title: SITE_TITLE, href: `${BASE_URL}/rss.xml` }],
+      ['link', { rel: 'icon', type: 'image/png', href: `${BASE_URL}/images/favicon.ico` }],
+      ['meta', { property: 'og:title', content: pageTitle }],
+      ['meta', { property: 'og:description', content: pageDescription }],
+      ['meta', { property: 'og:url', content: canonicalUrl }],
+      ['meta', { property: 'og:locale', content: 'zh_CN' }],
+      ['meta', { property: 'og:type', content: pageData.frontmatter?.date ? 'article' : 'website' }],
+      ['meta', { property: 'og:site_name', content: SITE_TITLE }],
+      ['meta', { name: 'twitter:card', content: 'summary' }],
+      ['meta', { name: 'twitter:title', content: pageTitle }],
+      ['meta', { name: 'twitter:description', content: pageDescription }],
+    ];
+    head.push(...headConfig);
 
     const themeInit = `(function(){try{var t=localStorage.getItem('sl-theme')||'auto';document.documentElement.dataset.theme=t;}catch(e){}})();`;
     head.push(['script', {}, themeInit]);

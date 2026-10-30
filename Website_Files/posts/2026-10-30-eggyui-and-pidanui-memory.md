@@ -1,8 +1,9 @@
 ---
 title: EggyUI 与 PidanUI 项目完整历史、技术演进与社群博弈全景记忆
 date: "2026-10-30 21:30:00"
-categories: [杂文]
+categories: [学习笔记]
 tags: [PidanUI, EggyUI]
+author: 小飞侠
 description: EggyUI 是一个以《蛋仔派对》为主题的 Windows 桌面美化系统，由 BSOD‑MEMZ 于 2024 年创建，最终版本为 2026 年发布的 EggyUI Finale Mini，现已被新项目 PidanUI 完全取代。
 stickypost: false
 ---
