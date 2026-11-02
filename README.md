@@ -61,6 +61,9 @@ src/
 4. **主题色是静态覆写的 `--mdui-color-primary-*`**（`_palette.scss`），不要在运行时调 `setColorScheme()`：它只能在客户端跑，首帧会先紫后蓝。
 5. **图标字体走 jsDelivr CDN**（`_fonts.scss` + `layout.tsx` 的 preload），仓库不存字体文件；图标名集中在 `data/icons.ts`，缺字形时只改一处。
 6. **新增工具**：`data/tools.ts` 加一条 → `components/tools/ToolBody.tsx` 的 registry 加一行 → 写组件 + hook。
+7. **盒模型由 `_base.scss` 的 `* { box-sizing: border-box }` 统一设定**。MDUI 的全局样式里一条 `box-sizing` 都没有（组件各自在 shadow DOM 内自理），漏掉这条就会让「`width: 100%` + 左右 padding」的元素按 content-box 撑出横向滚动条。
+8. **页面滚动发生在 `<mdui-layout-main>`，不是 `window`**。`html/body` 给足高度、`mdui-layout` 锁成 `100dvh`、`.app-main` 的 `min-height` 必须是 0（否则 flex 子项收缩不了，布局被内容撑高，独立滚动失效）。顶栏与抽屉是 layout 的 absolute item，因此天然吸顶/固定；任何需要监听滚动的地方都得显式指向主区（见顶栏的 `scroll-target`）。
+9. **侧栏在 `::part(panel)` 上自己滚**（`height: 100%` + `overflow-y: auto`）。不给高度的话面板会被 `:host` 的 `overflow: hidden` 直接裁掉，条目多时看不到底部。
 
 ## 部署
 
