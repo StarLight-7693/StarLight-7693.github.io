@@ -69,10 +69,7 @@ src/
 
 推送到 `main` 后由 `.github/workflows/deploy.yml` 自动执行 `pnpm install --frozen-lockfile` → `pnpm build` → 上传 `out/` → 部署 GitHub Pages。
 
-仓库里必须保留：
-
-- `public/.nojekyll` —— 否则 GitHub Pages 会过滤 `_next/` 目录，线上会变成纯文本
-- `public/CNAME` —— `www.skystarlight.top`
+仓库里不需要 `public/.nojekyll` 与 `public/CNAME`：这两个文件只对「从分支直接发布」的 Pages 生效。本站走自定义 GitHub Actions 工作流发布，Pages 不会再跑 Jekyll（`_next/` 不会被过滤），域名也在仓库 Settings → Pages 里配，仓库里的 `CNAME` 会被忽略。
 
 ### 域名接管注意
 
