@@ -1,0 +1,334 @@
+@use 'tokens' as *;
+
+// ============================================================
+// 页面内容：首页区块、工具入口卡、友链、404、工具页头部
+// ------------------------------------------------------------
+// 颜色全部取 MDUI 令牌，第二个参数是兜底值；
+// 数值（圆角/间距/断点）取 SCSS 令牌。
+// ============================================================
+
+// ---- 首页 Hero ----
+.hero {
+  padding: $gap-xl 0 $gap-l;
+}
+
+.hero-eyebrow {
+  margin: 0 0 $gap-s;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgb(var(--mdui-color-primary, 11 87 208));
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(28px, 4.4vw, 40px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: rgb(var(--mdui-color-on-surface, 0 0 0));
+}
+
+.hero-desc {
+  max-width: 44em;
+  margin: $gap-m 0 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+}
+
+.hero-points {
+  display: grid;
+  gap: $gap-s;
+  max-width: 44em;
+  margin: $gap-m 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+
+  li {
+    position: relative;
+    padding-left: 18px;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0.62em;
+      left: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgb(var(--mdui-color-primary, 11 87 208));
+    }
+  }
+}
+
+// ---- 区块通用 ----
+.section {
+  margin-top: $gap-xl;
+  scroll-margin-top: 80px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: rgb(var(--mdui-color-on-surface, 0 0 0));
+}
+
+.section-desc {
+  margin: $gap-xs 0 $gap-m;
+  font-size: 14px;
+  color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+}
+
+// ---- 工具分组与卡片 ----
+.tool-groups {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-l;
+}
+
+.tool-group-title {
+  margin: 0 0 $gap-s;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: rgb(var(--mdui-color-outline, 120 120 120));
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: $gap-m;
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tool-card {
+  display: flex;
+  align-items: center;
+  gap: $gap-m;
+  padding: $gap-m;
+  border: 1px solid rgb(var(--mdui-color-outline-variant, 220 220 220));
+  border-radius: $radius-l;
+  background: rgb(var(--mdui-color-surface-container-low, 255 255 255));
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color $transition,
+    background-color $transition,
+    box-shadow $transition;
+
+  &:hover {
+    border-color: rgb(var(--mdui-color-primary, 11 87 208));
+    background: rgb(var(--mdui-color-surface-container, 245 245 245));
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(var(--mdui-color-primary, 11 87 208));
+    outline-offset: 2px;
+  }
+}
+
+.tool-card-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-m;
+  background: rgb(var(--mdui-color-primary-container, 211 227 253));
+  color: rgb(var(--mdui-color-on-primary-container, 4 30 73));
+
+  mdui-icon {
+    font-size: 22px;
+  }
+}
+
+.tool-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tool-card-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(var(--mdui-color-on-surface, 0 0 0));
+}
+
+.tool-card-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+}
+
+.tool-card-arrow {
+  margin-left: auto;
+  font-size: 20px;
+  color: rgb(var(--mdui-color-outline, 140 140 140));
+}
+
+// ---- 友情链接 ----
+.friend-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: $gap-s;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgb(var(--mdui-color-outline-variant, 220 220 220));
+  border-radius: $radius-m;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color $transition,
+    background-color $transition;
+
+  &:hover {
+    border-color: rgb(var(--mdui-color-primary, 11 87 208));
+    background: rgb(var(--mdui-color-surface-container, 245 245 245));
+    text-decoration: none;
+  }
+}
+
+.friend-icon {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-s;
+  object-fit: contain;
+}
+
+.friend-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.friend-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(var(--mdui-color-on-surface, 0 0 0));
+}
+
+.friend-desc {
+  overflow: hidden;
+  font-size: 12px;
+  color: rgb(var(--mdui-color-on-surface-variant, 90 90 90));
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ---- 工具页 ----
+.tool-page {
+  padding-top: $gap-m;
+}
+
+.tool-header {
+  display: flex;
+  align-items: flex-start;
+  gap: $gap-m;
+  margin-bottom: $gap-l;
+}
+
+.tool-header-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-m;
+  background: rgb(var(--mdui-color-primary-container, 211 227 253));
+  color: rgb(var(--mdui-color-on-primary-container, 4 30 73));
+
+  mdui-icon {
+    font-size: 26px;
+  }
+}
+
+.tool-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: rgb(var(--mdui-color-on-surface, 0 0 0));
+}
+
+.tool-desc {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+}
+
+.tool-panel {
+  display: block;
+  padding: $gap-l;
+}
+
+.tool-placeholder {
+  margin: 0;
+  font-size: 14px;
+  color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+}
+
+// ---- 404 ----
+.notfound {
+  padding: $gap-xl 0;
+  text-align: center;
+}
+
+.notfound-code {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: rgb(var(--mdui-color-primary, 11 87 208));
+}
+
+.notfound-title {
+  margin: $gap-s 0 0;
+  font-size: 26px;
+  font-weight: 600;
+  color: rgb(var(--mdui-color-on-surface, 0 0 0));
+}
+
+.notfound-desc {
+  margin: $gap-s 0 $gap-l;
+  font-size: 14px;
+  color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+}
+
+.notfound-link {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: $radius-full;
+  background: rgb(var(--mdui-color-primary, 11 87 208));
+  color: rgb(var(--mdui-color-on-primary, 255 255 255));
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity $transition;
+
+  &:hover {
+    opacity: 0.88;
+    text-decoration: none;
+  }
+}

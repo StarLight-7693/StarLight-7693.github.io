@@ -17,6 +17,7 @@ export const ICONS = {
   contentCopy: 'content_copy',
   check: 'check',
   swapHoriz: 'swap_horiz',
+  chevronRight: 'chevron_right',
   base64: 'code',
   unicode: 'translate',
   timestamp: 'schedule',
