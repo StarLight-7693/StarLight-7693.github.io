@@ -18,6 +18,8 @@ export const SITE = {
   tech: ['Next.js', 'React', 'TypeScript', 'SCSS', 'MDUI'],
   /** 开发域名 */
   url: 'https://www.skystarlight.top',
+  /** 仓库域名 */
+  repoUrl: 'https://github.com/StarLight-7693/StarLight-7693.github.io',
 } as const;
 
 /** 站内路由帮助函数：trailingSlash 模式下必须带尾斜杠 */

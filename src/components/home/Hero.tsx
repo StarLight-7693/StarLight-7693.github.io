@@ -11,7 +11,6 @@ export default function Hero() {
       <p className="hero-desc">{SITE.description}</p>
       <ul className="hero-points">
         <li>所有计算都在你的浏览器里完成，输入内容不会上传到任何服务器。</li>
-        <li>纯静态站点，断网也能打开（图标字体除外）。</li>
         <li>开源，代码托管在 GitHub。</li>
       </ul>
     </section>

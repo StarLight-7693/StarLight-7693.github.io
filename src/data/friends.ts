@@ -31,8 +31,8 @@ export const FRIEND_LINKS: FriendLink[] = [
     icon: '/images/friendlinkicon/dmmdzzmusicarchive.webp',
   },
   {
-    name: 'EggyUI',
-    url: 'https://eggyui.skystarlight.top/',
+    name: 'PidanUI',
+    url: 'https://pidanui.eggycore.top/',
     desc: '一个蛋仔风 Windows 美化包',
     icon: '/images/friendlinkicon/eggyui.webp',
   },

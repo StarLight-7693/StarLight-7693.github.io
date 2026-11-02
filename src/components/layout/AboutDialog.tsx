@@ -52,6 +52,14 @@ export default function AboutDialog({ ref }: { ref?: Ref<HTMLElement> }) {
               </a>
             </dd>
           </div>
+          <div>
+            <dt>仓库地址</dt>
+            <dd>
+              <a href={SITE.repoUrl} target="_blank" rel="noopener noreferrer">
+                {SITE.repoUrl.replace('https://', '')}
+              </a>
+            </dd>
+          </div>
         </dl>
       </div>
 
