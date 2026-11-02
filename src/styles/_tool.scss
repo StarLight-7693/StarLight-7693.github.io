@@ -23,6 +23,9 @@
 
 .tool-field {
   width: 100%;
+  // 输入内容多是 Base64 / \uXXXX / 时间戳这类串，等宽更好对位；
+  // MDUI 的 textarea 是 font-family: inherit，所以这里设了就能传进去
+  font-family: var(--font-code);
 }
 
 .tool-actions {
@@ -60,7 +63,7 @@
   margin: 0;
   padding: $gap-m;
   overflow: auto;
-  font-family: 'Cascadia Code', Consolas, Menlo, monospace;
+  font-family: var(--font-code);
   font-size: 13px;
   line-height: 1.7;
   white-space: pre-wrap;

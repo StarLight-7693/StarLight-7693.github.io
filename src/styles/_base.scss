@@ -24,16 +24,23 @@ html {
   height: 100%;
 }
 
+// 字体栈（与冷域观者站保持同一套）
+// UI：HarmonyOS Sans SC（jsDelivr 分片 woff2，见 _fonts.scss），
+//     后面的 MiSans / PingFang / 雅黑 是字体没到或加载失败时的接力。
+// 代码：Cascadia Code，末尾挂中文无衬线——否则代码块里的中文会掉回宋体。
+:root {
+  --font-ui:
+    'HarmonyOS Sans SC', 'MiSans', 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', system-ui,
+    -apple-system, Roboto, sans-serif;
+  --font-code:
+    'Cascadia Code', 'Consolas', 'Menlo', 'Microsoft YaHei UI', 'PingFang SC', 'HarmonyOS Sans SC',
+    'Microsoft YaHei', monospace;
+}
+
 body {
   margin: 0;
   height: 100%;
-  font-family:
-    'PingFang SC',
-    'Microsoft YaHei',
-    'Segoe UI',
-    system-ui,
-    -apple-system,
-    sans-serif;
+  font-family: var(--font-ui);
   font-size: 15px;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -80,7 +87,7 @@ a {
 // 正文里的行内代码（工具说明、结果提示里会用到）
 code {
   padding: 0.1em 0.35em;
-  font-family: 'Cascadia Code', Consolas, Menlo, monospace;
+  font-family: var(--font-code);
   font-size: 0.9em;
   border-radius: 4px;
   background: rgba(var(--mdui-color-on-surface, 0 0 0), 0.06);
