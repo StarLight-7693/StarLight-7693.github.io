@@ -1,0 +1,98 @@
+@use 'tokens' as *;
+
+// ============================================================
+// 侧栏导航
+// ------------------------------------------------------------
+// 抽屉本体（宽度、圆角、遮罩）由 MDUI 负责，这里只通过 ::part(panel)
+// 调宽度，以及画导航条目。全站 ::part 只在这一处使用。
+// ============================================================
+
+mdui-navigation-drawer::part(panel) {
+  width: $drawer-w;
+  max-width: calc(100vw - 56px); // 窄屏留一条缝，暗示可以点遮罩关闭
+  border-radius: 0 $radius-l $radius-l 0;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xs;
+  padding: $gap-m 12px $gap-l;
+}
+
+.nav-title {
+  margin: $gap-m 0 $gap-s;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgb(var(--mdui-color-on-surface-variant, 90 90 90));
+}
+
+.nav-group + .nav-group {
+  margin-top: $gap-s;
+}
+
+.nav-subtitle {
+  margin: $gap-s 0 $gap-xs;
+  padding: 0 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgb(var(--mdui-color-outline, 120 120 120));
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// 导航条目：圆角行 + 前置图标，选中态用 primary-container
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: $radius-full;
+  font-size: 14px;
+  color: rgb(var(--mdui-color-on-surface-variant, 60 60 60));
+  text-decoration: none;
+  transition:
+    background-color $transition,
+    color $transition;
+
+  mdui-icon {
+    font-size: 20px;
+    color: rgb(var(--mdui-color-on-surface-variant, 60 60 60));
+    transition: color $transition;
+  }
+
+  &:hover {
+    background: rgba(var(--mdui-color-on-surface, 0 0 0), 0.06);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(var(--mdui-color-primary, 11 87 208));
+    outline-offset: 2px;
+  }
+
+  &.is-active {
+    background: rgb(var(--mdui-color-primary-container, 211 227 253));
+    color: rgb(var(--mdui-color-on-primary-container, 4 30 73));
+    font-weight: 600;
+
+    mdui-icon {
+      color: rgb(var(--mdui-color-on-primary-container, 4 30 73));
+    }
+
+    &:hover {
+      background: rgb(var(--mdui-color-primary-container, 211 227 253));
+    }
+  }
+}

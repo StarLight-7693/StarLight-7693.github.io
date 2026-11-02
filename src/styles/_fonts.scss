@@ -1,0 +1,28 @@
+// ============================================================
+// 字体
+// ------------------------------------------------------------
+// 界面字体用系统栈（中文用系统黑体），不额外引 webfont：
+// 工具站首屏就是输入框，字体晚到会明显闪一下。
+//
+// 图标字体（Material Icons）走 jsDelivr CDN，仓库不存字体文件：
+//   - font-display: block —— 字形没到时先留白，而不是先渲染出
+//     "more_vert" 这样的英文单词再突变
+//   - 版本号固定在 package.json 之外的一处，升级时改这里和
+//     app/layout.tsx 的 preload 链接即可
+// ============================================================
+
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url('https://cdn.jsdelivr.net/npm/material-icons@1.13.14/iconfont/material-icons.woff2')
+    format('woff2');
+}
+
+// MDUI 的图标组件默认就找这个字体族，这里显式声明一次：
+// 万一 CDN 的 @font-face 定义变了，也不会退回到系统字体显示英文名。
+mdui-icon {
+  font-family: 'Material Icons', sans-serif;
+  font-feature-settings: 'liga';
+}

@@ -1,0 +1,31 @@
+// ============================================================
+// 主题色（蓝色）
+// ------------------------------------------------------------
+// MDUI 的颜色令牌是「r, g, b」三元组，消费时必须写成
+//   color: rgb(var(--mdui-color-primary));
+//   background: rgba(var(--mdui-color-primary), 0.8);
+// 不能写 #hex，否则 rgb() 解析失败、颜色静默失效。
+//
+// 只覆写 primary 一组，其余（surface / outline / on-surface …）
+// 沿用 MDUI 默认值 —— 这样浅色深色两套中性色都不用自己维护。
+//
+// 不调 setColorScheme('#...')：它只能在客户端跑，首帧会先紫后蓝；
+// 而且会重算整套中性色，把结果框的干净灰底一起改掉。
+// ============================================================
+
+:root,
+.mdui-theme-light,
+.mdui-theme-dark,
+.mdui-theme-auto {
+  // 浅色：#0B57D0 —— Material Blue，白底对比度 5.9:1，正文与按钮都够
+  --mdui-color-primary-light: 11, 87, 208;
+  --mdui-color-on-primary-light: 255, 255, 255;
+  --mdui-color-primary-container-light: 211, 227, 253;
+  --mdui-color-on-primary-container-light: 4, 30, 73;
+
+  // 深色：#A8C7FA —— 同一色相的亮端，深底上不刺眼
+  --mdui-color-primary-dark: 168, 199, 250;
+  --mdui-color-on-primary-dark: 6, 46, 111;
+  --mdui-color-primary-container-dark: 8, 66, 160;
+  --mdui-color-on-primary-container-dark: 211, 227, 253;
+}

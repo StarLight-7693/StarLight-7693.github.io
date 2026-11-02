@@ -1,0 +1,74 @@
+@use 'tokens' as *;
+
+// ============================================================
+// 基础层
+// ------------------------------------------------------------
+// MDUI 已经在 :root / .mdui-theme-* 上设了 color 与 background-color，
+// 这里只补它不管的部分：字体栈、链接色、选中色、滚动条、焦点环。
+// ============================================================
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family:
+    'PingFang SC',
+    'Microsoft YaHei',
+    'Segoe UI',
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 颜色统一走 MDUI 令牌；第二个参数是兜底值，令牌缺失时不至于变成透明
+a {
+  color: rgb(var(--mdui-color-primary, 11 87 208));
+  text-decoration: none;
+  transition: color $transition;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(var(--mdui-color-primary, 11 87 208));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+::selection {
+  background: rgba(var(--mdui-color-primary, 11 87 208), 0.22);
+}
+
+* {
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgb(var(--mdui-color-outline-variant, 200 200 200));
+  border: 2px solid transparent;
+  border-radius: $radius-full;
+  background-clip: content-box;
+}
+
+// 正文里的行内代码（工具说明、结果提示里会用到）
+code {
+  padding: 0.1em 0.35em;
+  font-family: 'Cascadia Code', Consolas, Menlo, monospace;
+  font-size: 0.9em;
+  border-radius: 4px;
+  background: rgba(var(--mdui-color-on-surface, 0 0 0), 0.06);
+}

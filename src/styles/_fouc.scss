@@ -1,0 +1,39 @@
+// ============================================================
+// 未注册组件的可见性控制
+// ------------------------------------------------------------
+// MDUI 是 Web Components：JS 没跑之前 <mdui-button> 只是一个未知元素，
+// 里面的文字会以裸文本形式出现，然后突然变成按钮 —— 这就是 FOUC。
+//
+// 处理策略（不做整页淡入，避免弱网白屏）：
+//   1. 未注册的 MDUI 元素先隐藏（visibility 而不是 display：
+//      不改变布局，隐藏期间页面不会跳）
+//   2. JS 注册完成后 MduiProvider 给 <html> 加 .mdui-ready，无条件放行 ——
+//      即使个别组件注册失败，也只是退化成裸内容，不会永久隐身
+//   3. 浏览器禁用脚本时（scripting: none），直接放行
+// ============================================================
+
+$mdui-tags:
+  'mdui-layout', 'mdui-layout-main', 'mdui-top-app-bar', 'mdui-top-app-bar-title',
+  'mdui-navigation-drawer', 'mdui-list', 'mdui-list-item', 'mdui-collapse', 'mdui-collapse-item',
+  'mdui-button', 'mdui-button-icon', 'mdui-card', 'mdui-icon', 'mdui-divider', 'mdui-dropdown',
+  'mdui-menu', 'mdui-menu-item', 'mdui-dialog', 'mdui-text-field', 'mdui-switch', 'mdui-snackbar';
+
+@each $tag in $mdui-tags {
+  #{$tag}:not(:defined) {
+    visibility: hidden;
+  }
+
+  // 注册流程走完（含 3s 超时兜底）后一律放行
+  html.mdui-ready #{$tag}:not(:defined) {
+    visibility: visible;
+  }
+}
+
+// 禁用 JS 时 whenDefined 永远不会 resolve，直接放行
+@media (scripting: none) {
+  @each $tag in $mdui-tags {
+    #{$tag}:not(:defined) {
+      visibility: visible;
+    }
+  }
+}
