@@ -1,0 +1,51 @@
+name: Lint & Format
+
+# 代码风格守门：oxlint（可能出错的地方）+ Prettier（排版）+ tsc（类型）
+#
+# 三个触发来源：
+#   pull_request —— 所有 PR（含 fork 发起的）都跑一次
+#   push         —— 分支推送也跑，但只要不是 main；main 由 deploy.yml 以
+#                   workflow_call 调用，避免同一次推送跑两遍
+#   workflow_call —— 供 deploy.yml 复用，部署前先过这一关
+on:
+  push:
+    # 注意：main 的检查交给 deploy.yml 里 needs 的关系，这里不要重复声明
+    branches-ignore: ['main']
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: oxlint + Prettier + tsc
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 先查排版：报错信息是「哪个文件没按 Prettier 排」，比 lint 报错更好定位
+      - name: Prettier (format:check)
+        run: pnpm run format:check
+
+      - name: oxlint
+        run: pnpm run lint
+
+      # 类型检查与 build 的差异：这条只跑 tsc，几秒出结果，
+      # 不用等整次静态导出就能看到类型错误
+      - name: TypeScript (tsc --noEmit)
+        run: pnpm run typecheck

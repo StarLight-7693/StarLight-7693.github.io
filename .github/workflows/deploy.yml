@@ -15,7 +15,15 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # 代码风格守门：先跑 lint.yml（oxlint + Prettier + tsc），不通过就不构建、不部署。
+  # 用可复用工作流而不是在这里重抄一遍步骤，PR 与 main 走的是同一份检查逻辑。
+  quality:
+    uses: ./.github/workflows/lint.yml
+    permissions:
+      contents: read
+
   build:
+    needs: quality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
