@@ -1,0 +1,73 @@
+@use 'tokens' as *;
+
+// ============================================================
+// 工具页内部排版
+// ------------------------------------------------------------
+// MDUI 的 mdui-text-field / mdui-button 自带外观，这里只管
+// 它们之间的间距、结果框的样式与按钮的换行。
+// 面积最大的一块是 <pre>，所以单独给它等宽字体与可滚动的上限高度。
+// ============================================================
+
+.tool-body {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-l;
+}
+
+// 两列输入（时间戳工具）：窄屏自动堆叠
+.tool-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: $gap-m;
+}
+
+.tool-field {
+  width: 100%;
+}
+
+.tool-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap-s;
+  align-items: center;
+}
+
+// ---- 结果框 ----
+.tool-result {
+  border: 1px solid rgb(var(--mdui-color-outline-variant, 220 220 220));
+  border-radius: $radius-l;
+  overflow: hidden;
+  background: rgb(var(--mdui-color-surface-container-low, 252 252 252));
+}
+
+.tool-result-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $gap-s;
+  padding: 6px 8px 6px $gap-m;
+  border-bottom: 1px solid rgb(var(--mdui-color-outline-variant, 220 220 220));
+}
+
+.tool-result-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+}
+
+.tool-result-body {
+  max-height: 320px;
+  margin: 0;
+  padding: $gap-m;
+  overflow: auto;
+  font-family: 'Cascadia Code', Consolas, Menlo, monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: rgb(var(--mdui-color-on-surface, 0 0 0));
+
+  &.is-error {
+    color: rgb(var(--mdui-color-error, 179 38 30));
+  }
+}

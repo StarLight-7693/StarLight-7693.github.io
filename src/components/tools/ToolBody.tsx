@@ -1,16 +1,38 @@
 'use client';
 
+import type { ComponentType } from 'react';
+
+import Base64Tool from './Base64Tool';
+import EggyMapTextTool from './EggyMapTextTool';
+import TimestampTool from './TimestampTool';
+import UnicodeTool from './UnicodeTool';
+import UrlTool from './UrlTool';
+
 // ============================================================
 // 工具主体分发
 // ------------------------------------------------------------
-// 只做「slug → 组件」的映射，所有工具组件都是客户端组件
-// （需要 useState / 剪贴板 / 事件）。
+// slug → 组件的唯一映射。新增工具时：data/tools.ts 加一条，
+// 这里加一行，再写组件。三处之外不需要动任何东西。
 // ============================================================
 
+const REGISTRY: Record<string, ComponentType> = {
+  base64: Base64Tool,
+  unicode: UnicodeTool,
+  url: UrlTool,
+  timestamp: TimestampTool,
+  'eggy-map-text': EggyMapTextTool,
+};
+
 export default function ToolBody({ slug }: { slug: string }) {
-  return (
-    <mdui-card className="tool-panel">
-      <p className="tool-placeholder">工具「{slug}」正在接线中。</p>
-    </mdui-card>
-  );
+  const Tool = REGISTRY[slug];
+
+  if (!Tool) {
+    return (
+      <mdui-card className="tool-panel">
+        <p className="tool-placeholder">没有这个工具。</p>
+      </mdui-card>
+    );
+  }
+
+  return <Tool />;
 }
