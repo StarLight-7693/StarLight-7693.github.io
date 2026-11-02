@@ -78,7 +78,7 @@ export default function AppShell({ children }: AppShellProps) {
 
   return (
     <>
-      <mdui-layout full-height>
+      <mdui-layout full-height className="app-layout">
         <TopBar drawerOpen={drawerOpen} onToggleMenu={toggleMenu} onAbout={openAbout} />
 
         <mdui-navigation-drawer ref={drawerRef} id="site-nav" close-on-esc close-on-overlay-click>

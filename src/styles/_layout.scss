@@ -7,16 +7,38 @@
 // 「内容宽度、留白、页脚、关于对话框的排版」。
 // ============================================================
 
+// ---- 滚动容器 ----
+// 布局高度锁死在视口内，页面滚动交给 <mdui-layout-main>（MDUI 自带
+// overflow: auto）。这样主区滚动时，顶栏与抽屉都留在原地不动，
+// 侧栏因此拥有自己的滚动条，而不是跟着正文一起滚走。
+//
+// 特异性说明：MDUI 内部是 :host([full-height]:not([full-height=false i]))
+// （0,2,0），只写 mdui-layout[full-height] 会被它压住，所以叠一个类名。
+// 高度用 dvh：移动端地址栏收起/展开时 100vh 会多出一截，页面就会整体抖。
+mdui-layout.app-layout[full-height] {
+  height: 100vh;
+  height: 100dvh;
+}
+
+// 顶栏吸顶
+// MDUI 会把 layout 的每个 item 设成 position: absolute 并钉在 layout 顶部，
+// 而 layout 的高度锁死 100dvh、滚动只发生在主区，所以顶栏本来就不会随内容走。
+// 这里只补 z-index：主区内容与抽屉遮罩之间，顶栏要压住前者。
+mdui-top-app-bar.app-bar {
+  --z-index: 5;
+}
+
 // 顶栏控件之间的弹性空隙（官方示例用的是内联 flex-grow，这里收成类名）
 .app-bar-spacer {
   flex: 1 1 auto;
 }
 
-// 主区：撑满剩余高度，让页脚自然沉底
+// 主区：flex 子项，必须允许收缩（min-height: 0），否则内容会被撑高、
+// 由外层滚动，上面那套「主区独立滚动」就失效了
 .app-main {
   display: flex;
   flex-direction: column;
-  min-height: 100%;
+  min-height: 0;
 }
 
 .app-content {

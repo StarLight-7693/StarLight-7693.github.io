@@ -7,9 +7,23 @@
 // 调宽度，以及画导航条目。全站 ::part 只在这一处使用。
 // ============================================================
 
+// 抽屉占满 layout 的高度：它被 MDUI 设成 position: absolute 且只给了
+// top/left，不给高度的话面板会随内容长高，超出部分被 :host 的
+// overflow: hidden 直接裁掉（没有滚动条，等于看不到底部条目）。
+mdui-navigation-drawer {
+  height: 100%;
+}
+
 mdui-navigation-drawer::part(panel) {
   width: $drawer-w;
-  max-width: calc(100vw - 56px); // 窄屏留一条缝，暗示可以点遮罩关闭
+  // 用 100% 而不是 100vw：100vw 把纵向滚动条也算进去，存在滚动条时
+  // 会比赛道宽出 10px，窄屏下正好能凑出一条横向滚动条
+  max-width: calc(100% - 56px); // 窄屏留一条缝，暗示可以点遮罩关闭
+  height: 100%;
+  // 侧栏自己滚：条目多于视口高度时在面板内滚动，
+  // 与正文的滚动互不影响（正文滚的是 mdui-layout-main）
+  overflow-y: auto;
+  overscroll-behavior: contain;
   border-radius: 0 $radius-l $radius-l 0;
 }
 

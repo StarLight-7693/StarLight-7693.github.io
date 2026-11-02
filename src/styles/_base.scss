@@ -4,16 +4,29 @@
 // 基础层
 // ------------------------------------------------------------
 // MDUI 已经在 :root / .mdui-theme-* 上设了 color 与 background-color，
-// 这里只补它不管的部分：字体栈、链接色、选中色、滚动条、焦点环。
+// 这里只补它不管的部分：盒模型、字体栈、链接色、选中色、滚动条、焦点环。
 // ============================================================
+
+// MDUI 全局样式里没有任何 box-sizing 规则（组件各自在 shadow DOM 内自理），
+// 所以这里是唯一一处设定。缺了它，.app-content / .site-footer 的
+// 「width: 100% + 左右 padding」会按 content-box 计算成 100% + 48px，
+// 在首页与工具页直接撑出横向滚动条。
+// 只影响 light DOM，MDUI 组件内部的盒模型不受影响。
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  height: 100%;
 }
 
 body {
   margin: 0;
+  height: 100%;
   font-family:
     'PingFang SC',
     'Microsoft YaHei',

@@ -23,7 +23,15 @@ interface TopBarProps {
 
 export default function TopBar({ drawerOpen, onToggleMenu, onAbout }: TopBarProps) {
   return (
-    <mdui-top-app-bar scroll-behavior="elevate" className="app-bar" id="site-bar">
+    // scroll-target 必须显式指向主区：页面滚动已经从 window 移交给
+    // <mdui-layout-main>（侧栏与顶栏才能保持不动），顶栏默认监听 window
+    // 会永远收不到 scroll 事件，elevate 阴影就再也不会出现
+    <mdui-top-app-bar
+      scroll-behavior="elevate"
+      scroll-target="mdui-layout-main"
+      className="app-bar"
+      id="site-bar"
+    >
       <mdui-button-icon
         icon={drawerOpen ? ICONS.close : ICONS.menu}
         aria-label={drawerOpen ? '收起导航' : '展开导航'}
