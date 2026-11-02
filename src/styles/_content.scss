@@ -290,21 +290,14 @@
 }
 
 // ---- 404 ----
+// 结构与源站的彩蛋版一致：标题 → 一句随机理由 → iframe → 返回首页 → 梗说明。
+// 左对齐（源站就是左对齐），只有播放器限宽并保持 16:9。
 .notfound {
   padding: $gap-xl 0;
-  text-align: center;
-}
-
-.notfound-code {
-  margin: 0;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  color: rgb(var(--mdui-color-primary, 11 87 208));
 }
 
 .notfound-title {
-  margin: $gap-s 0 0;
+  margin: 0;
   font-size: 26px;
   font-weight: 600;
   color: rgb(var(--mdui-color-on-surface, 0 0 0));
@@ -312,12 +305,26 @@
 
 .notfound-desc {
   margin: $gap-s 0 $gap-l;
-  font-size: 14px;
+  font-size: 15px;
+  line-height: 1.8;
   color: rgb(var(--mdui-color-on-surface-variant, 70 70 70));
+}
+
+// 播放器：不给固定宽高，靠 aspect-ratio 自适应；
+// max-width 防止在 4K 显示器上被拉成一整屏高
+.notfound-player {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: $radius-l;
+  background: rgb(var(--mdui-color-surface-container, 240 240 240));
 }
 
 .notfound-link {
   display: inline-block;
+  margin-top: $gap-l;
   padding: 10px 20px;
   border-radius: $radius-full;
   background: rgb(var(--mdui-color-primary, 11 87 208));
@@ -331,4 +338,14 @@
     opacity: 0.88;
     text-decoration: none;
   }
+}
+
+.notfound-egg {
+  max-width: 44em;
+  margin: $gap-xl 0 0;
+  padding-top: $gap-l;
+  border-top: 1px solid rgb(var(--mdui-color-outline-variant, 220 220 220));
+  font-size: 13px;
+  line-height: 1.9;
+  color: rgb(var(--mdui-color-on-surface-variant, 100 100 100));
 }
