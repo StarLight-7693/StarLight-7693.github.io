@@ -23,12 +23,12 @@ interface TopBarProps {
 
 export default function TopBar({ drawerOpen, onToggleMenu, onAbout }: TopBarProps) {
   return (
-    // scroll-target 必须显式指向主区：页面滚动已经从 window 移交给
-    // <mdui-layout-main>（侧栏与顶栏才能保持不动），顶栏默认监听 window
+    // scroll-target 必须显式指向真正的滚动容器：页面滚动已经从 window
+    // 移到 .app-scroll 上（见 AppShell 里的嵌套原因），顶栏默认监听 window
     // 会永远收不到 scroll 事件，elevate 阴影就再也不会出现
     <mdui-top-app-bar
       scroll-behavior="elevate"
-      scroll-target="mdui-layout-main"
+      scroll-target=".app-scroll"
       className="app-bar"
       id="site-bar"
     >

@@ -41,6 +41,25 @@ mdui-top-app-bar.app-bar {
   min-height: 0;
 }
 
+// 本身不滚：MDUI 的 :host 是 overflow: auto，这里压成 hidden，
+// 让滚动落到内层 .app-scroll（顶栏高度以下的区域）。
+// 叠一层元素名提高特异性，避免和 shadow 里的 :host 打成平手。
+mdui-layout-main.app-main {
+  overflow: hidden;
+}
+
+// 真正的滚动容器
+// 它位于 mdui-layout-main 的 padding-top 之内，因此滚动条从顶栏下边缘开始，
+// 不会被 position: absolute 的顶栏切掉一截。
+.app-scroll {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+}
+
 .app-content {
   flex: 1 0 auto;
   width: 100%;

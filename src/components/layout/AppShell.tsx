@@ -86,8 +86,14 @@ export default function AppShell({ children }: AppShellProps) {
         </mdui-navigation-drawer>
 
         <mdui-layout-main className="app-main">
-          <div className="app-content">{children}</div>
-          <SiteFooter />
+          {/* 滚动容器下移一层：mdui-layout-main 自己有 padding-top（顶栏高度），
+              如果把 overflow 放在它身上，滚动条会从视口顶端 y=0 开始，
+              顶上那 64px 正好被 position: absolute 的顶栏盖住。
+              放在内层 .app-scroll 里，滚动条自然从顶栏下边缘起。 */}
+          <div className="app-scroll">
+            <div className="app-content">{children}</div>
+            <SiteFooter />
+          </div>
         </mdui-layout-main>
       </mdui-layout>
 
