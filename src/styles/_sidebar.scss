@@ -7,11 +7,35 @@
 // 调宽度，以及画导航条目。全站 ::part 只在这一处使用。
 // ============================================================
 
+// 抽屉宽度对外暴露一份：滑动手势要在抽屉关着（host display:none、
+// 量不到实际宽度）的时候就知道面板有多宽，否则跟手的位移全是 0。
+:root {
+  --drawer-w: #{$drawer-w};
+}
+
 // 抽屉占满 layout 的高度：它被 MDUI 设成 position: absolute 且只给了
 // top/left，不给高度的话面板会随内容长高，超出部分被 :host 的
 // overflow: hidden 直接裁掉（没有滚动条，等于看不到底部条目）。
 mdui-navigation-drawer {
   height: 100%;
+}
+
+// 窄屏让抽屉从顶栏下方开始
+// ------------------------------------------------------------
+// MDUI 在窄屏会给宿主加 [mobile]，其 shadow 内的样式是
+//   :host([mobile]){ top: 0 !important; bottom: 0 !important; ... }
+// 按 CSS Scoping 的级联规则，shadow 内的 !important 声明**赢过**外层的
+// !important，所以改 top 是死路（试过，计算值依旧是 0）。
+//
+// 换一条不冲突的路：不动 top，用 transform 整体下移，同时把高度减去顶栏。
+//   高度 748 + 下移 64 → 视觉上正好占满 64 → 视口底
+// 面板与遮罩都是宿主的子节点，会一起下移，顶栏就完全露出来了。
+@media (max-width: 839.98px) {
+  mdui-navigation-drawer {
+    // 桌面那条 height:100% 会跟 bottom:0 打架（top 优先，底部溢出被裁）
+    height: calc(100% - var(--app-bar-h, 64px));
+    transform: translateY(var(--app-bar-h, 64px));
+  }
 }
 
 mdui-navigation-drawer::part(panel) {
@@ -24,6 +48,8 @@ mdui-navigation-drawer::part(panel) {
   // 与正文的滚动互不影响（正文滚的是 mdui-layout-main）
   overflow-y: auto;
   overscroll-behavior: contain;
+  // 把水平手势留给抽屉的滑动开关，垂直方向仍交给浏览器滚动
+  touch-action: pan-y;
   border-radius: 0 $radius-l $radius-l 0;
 }
 

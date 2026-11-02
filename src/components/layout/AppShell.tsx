@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useDrawerSwipe } from '@/hooks/useDrawerSwipe';
 import AboutDialog from './AboutDialog';
 import SideNav from './SideNav';
 import SiteFooter from './SiteFooter';
@@ -15,8 +16,11 @@ import TopBar from './TopBar';
 //
 // 抽屉不传 modal：MDUI 的规则是「屏宽 < 840px 时无视 modal 强制遮罩」，
 // 正好实现「桌面推挤内容 / 窄屏覆盖 + 遮罩」。
+// 窄屏时抽屉要让开顶栏，靠的是 _sidebar.scss 里的 top 覆盖（MDUI 内部
+// 对 [mobile] 用了 !important，只能从外层同权重压回去）。
 //
 // open 用 ref 命令式赋值，不走 JSX 布尔属性（见 AboutDialog 的注释）。
+// 滑动手势（窄屏边缘右滑打开 / 抽屉内左滑关闭）见 useDrawerSwipe。
 // ============================================================
 
 /** 与 --mdui-breakpoint-md 对齐：>= 840px 视为桌面 */
@@ -30,6 +34,29 @@ export default function AppShell({ children }: AppShellProps) {
   const drawerRef = useRef<HTMLElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useDrawerSwipe(drawerRef);
+
+  // 把顶栏真实高度写进 --app-bar-h：抽屉让位、主区留白都读它。
+  // 顶栏是 MDUI 组件，首次渲染时还没注册（高度为 0），
+  // 所以用 ResizeObserver 等它成型后再补一次，不写死 64。
+  useEffect(() => {
+    const bar = document.querySelector('mdui-top-app-bar');
+    if (!bar) return;
+
+    const sync = () => {
+      const height = bar.getBoundingClientRect().height;
+      if (height > 0) {
+        document.documentElement.style.setProperty('--app-bar-h', `${height}px`);
+      }
+    };
+
+    sync();
+    const observer = new ResizeObserver(sync);
+    observer.observe(bar);
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const drawer = drawerRef.current;

@@ -20,6 +20,13 @@ mdui-layout.app-layout[full-height] {
   height: 100dvh;
 }
 
+// 顶栏高度（主区 padding-top、抽屉让位都读它）
+// 只是兜底值：AppShell 会在运行期量一次真实高度写回来，
+// 这样将来换 medium/large 变体也不会错位。
+:root {
+  --app-bar-h: 64px;
+}
+
 // 顶栏吸顶
 // MDUI 会把 layout 的每个 item 设成 position: absolute 并钉在 layout 顶部，
 // 而 layout 的高度锁死 100dvh、滚动只发生在主区，所以顶栏本来就不会随内容走。
