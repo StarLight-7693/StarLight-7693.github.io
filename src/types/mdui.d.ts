@@ -29,6 +29,15 @@ export interface MduiSwitchElement extends HTMLElement {
   checked: boolean;
 }
 
+/**
+ * 涟漪层。它本身 `pointer-events: none`，也不会自己绑事件，
+ * 要由外层在 pointerdown / pointerup 时手动驱动。
+ */
+export interface MduiRippleElement extends HTMLElement {
+  startPress(event?: Event): void;
+  endPress(): void;
+}
+
 type MduiAttrs = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> &
   RefAttributes<HTMLElement> & {
     [attr: string]: unknown;
@@ -59,6 +68,7 @@ declare module 'react' {
       'mdui-text-field': MduiAttrs;
       'mdui-switch': MduiAttrs;
       'mdui-snackbar': MduiAttrs;
+      'mdui-ripple': MduiAttrs;
     }
   }
 }

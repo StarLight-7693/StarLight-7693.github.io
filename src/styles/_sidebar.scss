@@ -67,6 +67,7 @@ mdui-navigation-drawer::part(panel) {
 
 // 导航条目：圆角行 + 前置图标，选中态用 primary-container
 .nav-item {
+  position: relative; // 涟漪层的定位基准（mdui-ripple 是 absolute 铺满）
   display: flex;
   align-items: center;
   gap: 12px;
@@ -109,4 +110,14 @@ mdui-navigation-drawer::part(panel) {
       background: rgb(var(--mdui-color-primary-container, 211 227 253));
     }
   }
+}
+
+// 涟漪层
+// 组件未注册时它就是普通未知元素，用绝对定位压成零占位，
+// 免得在 flex 行里多出一段 gap；圆角继承行本身，水波才不会溢出圆角。
+.nav-item mdui-ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
 }
